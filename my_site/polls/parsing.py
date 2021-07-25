@@ -25,8 +25,30 @@ def daily_boxoffice():
     print(data)
 
 
+movieNm = "광해, 왕이 된 남자"
 
-#def movie_Code():
+#영화목록에서 추출
+def movie_Code():
+    url = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=e7e124bb3ca8d0b4ebdf6269f1ffb860&movieNm='+movieNm
+
+
+    res = requests.get(url)
+    text = res.text
+
+    d = json.loads(text)
+    movie = []
+
+    for b in d['movieListResult']['movieList']:
+        movie.append([b['movieCd']])
+
+
+    data = pd.DataFrame(movie)
+    data.to_csv("daily_boxoffice.csv", mode='w', encoding='utf-8', index=False)
+
+    print(data)
+
+movie_Code()
+
 
 
 def movie_Info():
@@ -38,18 +60,19 @@ def movie_Info():
     d = json.loads(text)
     movie = []
 
-    movie_gen = []
-    for gen in d['movieInfoResult']['movieInfo']['genres']:
-        movie_gen.append(gen['genreNm'])
+    movie_gen = d['movieInfoResult']['movieInfo']['genres']
 
-    print(movie_gen)
+    print(movie_gen.get('genreNm'))
+
+    # for gen in movie_gen:
+    #     print(gen)
 
     #영화코드/영화명/개봉일/개봉여부/장르
     movie.append([d['movieInfoResult']['movieInfo']['movieCd'],
                 d['movieInfoResult']['movieInfo']['movieNm'],
                 d['movieInfoResult']['movieInfo']['openDt'],
                 d['movieInfoResult']['movieInfo']['prdtStatNm'],
-                d[movie_gen[0]], d[movie_gen[1]]
+
                 ])
 
     data = pd.DataFrame(movie)
@@ -58,7 +81,7 @@ def movie_Info():
     print(data)
 
 
-movie_Info()
+
 
 
 
