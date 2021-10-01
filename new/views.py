@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Movie, Review, UpMovie
+from .models import Movie, UpMovie
 from django.core.paginator import Paginator
-from .forms import MovieForm, ReviewForm, UpMovieForm
-from django.http import HttpResponseRedirect
+from .forms import MovieForm, UpMovieForm
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 import os
 import requests
 from django.db.models import Count
@@ -21,17 +21,15 @@ def Uplist(request):
     return render(request, 'new/upcoming.html', context)
 
 
-def list(request):
-    movies = Movie.objects.all().annotate(reviews_count=Count('review')).order_by('-release_date')
-    paginator = Paginator(movies, 5)
+def Nowlist(request):
+    TMD_KEY = "50345352d8804fc2856b251bde51011d"
+    movies = f"https://api.themoviedb.org/3/movie/now_playing?api_key={TMD_KEY}&language=ko-KR&region=KR"
+    res = request.GET.get('results', json)
 
-    page = request.GET.get('page')
-    items = paginator.get_page(page)
+    if request.method == 'GET':
+        return JsonResponse(res.json())
 
-    context = {
-        'movies': items
-    }
-    return render(request, 'new/list.html', context)
+    # return render(request, 'new/list.html', context)
 
 
 def create(request):
@@ -165,41 +163,41 @@ def Upcreate(request):
 def detail(request, id):
     if id is not None:
         item = get_object_or_404(Movie, pk=id)
-        reviews = Review.objects.filter(movie=item).all()
-        return render(request, 'new/detail.html', {'item': item, 'reviews': reviews})
+        # reviews = Review.objects.filter(movie=item).all()
+        return render(request, 'new/detail.html', {'item': item})
 
     return HttpResponseRedirect('/new/list/')
 
 
-def review_create(request, movie_id):
-    if request.method == 'POST':
-        form = ReviewForm(request.POST)
-        if form.is_valid():
-            new_item = form.save()
-        return redirect('movie-detail', id=movie_id)
-
-    item = get_object_or_404(Movie, pk=movie_id)
-    form = ReviewForm(initial={'movie': item})
-    return render(request, 'new/review_create.html', {'form': form, 'item':item})
-
-
-def review_delete(request, movie_id, review_id):
-    item = get_object_or_404(Review, pk=review_id)
-    item.delete()
-
-    return redirect('movie-detail', id=movie_id)
-
-
-def review_list(request):
-    reviews = Review.objects.all().select_related()
-    paginator = Paginator(reviews, 10)
-
-    page = request.GET.get('page')
-    items = paginator.get_page(page)
-
-    context = {
-        'reviews': items
-    }
-    return render(request, 'new/review_list.html', context)
+# def review_create(request, movie_id):
+#     if request.method == 'POST':
+#         form = ReviewForm(request.POST)
+#         if form.is_valid():
+#             new_item = form.save()
+#         return redirect('movie-detail', id=movie_id)
+#
+#     item = get_object_or_404(Movie, pk=movie_id)
+#     form = ReviewForm(initial={'movie': item})
+#     return render(request, 'new/review_create.html', {'form': form, 'item':item})
+#
+#
+# def review_delete(request, movie_id, review_id):
+#     item = get_object_or_404(Review, pk=review_id)
+#     item.delete()
+#
+#     return redirect('movie-detail', id=movie_id)
+#
+#
+# def review_list(request):
+#     reviews = Review.objects.all().select_related()
+#     paginator = Paginator(reviews, 10)
+#
+#     page = request.GET.get('page')
+#     items = paginator.get_page(page)
+#
+#     context = {
+#         'reviews': items
+#     }
+#     return render(request, 'new/review_list.html', context)
 
 

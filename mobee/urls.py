@@ -27,7 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('mainApp.urls')),
     path('movie/', include('Comment.urls')),
-    path('movielist/',include('new.urls')),
+    path('',include('new.urls')),
     #re_path('.*', TemplateView.as_view(template_name='index.html')),
    # path('create_post/', createPost, name="post" ) #add this
 

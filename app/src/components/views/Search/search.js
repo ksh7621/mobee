@@ -66,7 +66,9 @@ function Search() {
     if (error) return <div>에러가 발생했습니다</div>;
     if (!movie) return null;
     return (
+
         <div style={{width: '100%', margin: '0'}}>
+
             <div style={{textAlign: 'center'}}>
                 <input type="text" placeholder="Enter title to be searched" onChange={onchange}/>
                 <button onClick={onclick}>Search</button>
@@ -109,6 +111,7 @@ function Search() {
             </div>
 
         </div>
+
     );
 }
 export default Search;

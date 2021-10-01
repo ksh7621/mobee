@@ -1,12 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
 import React, {Suspense, useEffect} from 'react';
-import {Route, Switch, BrowserRouter} from "react-router-dom";
+import {Route, Switch, BrowserRouter, Link} from "react-router-dom";
 import axios from "axios";
 
+import Navbar from "./components/views/menu/Navbar";
 import SearchDirector from "./components/views/Search/searchDirector";
 import Search from "./components/views/Search/search.js";
 import MovieDetail from "./components/views/movieDetail";
+import NewMovie from "./components/views/Newmovie";
+
 
 function App() {
 
@@ -14,15 +17,18 @@ function App() {
     return (
         <Suspense fallback={(<div>Loading...</div>)}>
             {/*<NavBar />*/}
-            <div style={{paddingTop: '69px', minHeight: 'calc(100vh - 80px)'}}>
+
+            <div style={{paddingTop: '69px',  minHeight: 'calc(100vh - 80px)'}}>
+
                 <BrowserRouter>
+                    <Navbar/>
                     <Switch>
                         <Route exact path="/search" component={Search}/>
                         <Route exact path="/search/searchDirector" component={SearchDirector}/>
                         <Route exact path="/movie/:movieId" component={MovieDetail}/>
+                        <Route exact path="/nowplaying" component={NewMovie}/>
                     </Switch>
                 </BrowserRouter>
-
             </div>
             {/*<Footer />*/}
         </Suspense>

@@ -1,44 +1,44 @@
-{% extends 'new/base.html' %}
-{% load static %}
-{% block content %}
-<div class="container">
-    {% for item in upmovies %}
-    <div class="row upmovie-item" style="margin:20px auto;">
-        <div class="col-sm-12">
-            <div class="card border-secondary">
-              <div class="card-body">
-                <h5 class="card-title">{{ item.title }}</h5>
-                <img src="{{ item.poster_path }}" style="width:20%; height:20%" class="card-img-top"/>
-                <hr>
-                <h6 class="card-subtitle mb-2 text-muted">{{ item.genre }}</h6>
-                <p class="card-text">{{ item.overview }}</p>
-                <a href="{% url 'movie-detail' id=item.id %}" class="card-link">자세히 보기</a>
-              </div>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
+<!--{% extends 'new/base.html' %}-->
+<!--{% load static %}-->
+<!--{% block content %}-->
+<!--<div class="container">-->
+<!--    {% for item in upmovies %}-->
+<!--    <div class="row upmovie-item" style="margin:20px auto;">-->
+<!--        <div class="col-sm-12">-->
+<!--            <div class="card border-secondary">-->
+<!--              <div class="card-body">-->
+<!--                <h5 class="card-title">{{ item.title }}</h5>-->
+<!--                <img src="{{ item.poster_path }}" style="width:20%; height:20%" class="card-img-top"/>-->
+<!--                <hr>-->
+<!--                <h6 class="card-subtitle mb-2 text-muted">{{ item.genre }}</h6>-->
+<!--                <p class="card-text">{{ item.overview }}</p>-->
+<!--                <a href="{% url 'movie-detail' id=item.id %}" class="card-link">자세히 보기</a>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    {% endfor %}-->
 
-    <div class="row">
-        <div class="col-sm-12 text-center">
-            <div class="pagination">
-                <span class="step-links text-center" style="width:100%;">
-                    {% if upmovies.has_previous %}
-                        <a href="?page=1">&laquo;</a>
-                        <a href="?page={{ upmovies.previous_page_number }}">{{ upmovies.previous_page_number }}</a>
-                    {% endif %}
+<!--    <div class="row">-->
+<!--        <div class="col-sm-12 text-center">-->
+<!--            <div class="pagination">-->
+<!--                <span class="step-links text-center" style="width:100%;">-->
+<!--                    {% if upmovies.has_previous %}-->
+<!--                        <a href="?page=1">&laquo;</a>-->
+<!--                        <a href="?page={{ upmovies.previous_page_number }}">{{ upmovies.previous_page_number }}</a>-->
+<!--                    {% endif %}-->
 
-                    <span class="current">
-                        {{ upmovies.number }}
-                    </span>
+<!--                    <span class="current">-->
+<!--                        {{ upmovies.number }}-->
+<!--                    </span>-->
 
-                    {% if upmovies.has_next %}
-                        <a href="?page={{ upmovies.next_page_number }}">{{ upmovies.next_page_number }}</a>
-                        <a href="?page={{ upmovies.paginator.num_pages }}">&raquo;</a>
-                    {% endif %}
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
+<!--                    {% if upmovies.has_next %}-->
+<!--                        <a href="?page={{ upmovies.next_page_number }}">{{ upmovies.next_page_number }}</a>-->
+<!--                        <a href="?page={{ upmovies.paginator.num_pages }}">&raquo;</a>-->
+<!--                    {% endif %}-->
+<!--                </span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--{% endblock %}-->

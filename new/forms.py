@@ -1,5 +1,5 @@
 from django import forms
-from .models import Movie, Review, UpMovie
+from .models import Movie, UpMovie
 from django.forms import ModelForm
 from django.utils.translation import gettext_lazy as _
 
@@ -18,16 +18,16 @@ class UpMovieForm(forms.ModelForm):
         fields = '__all__'
 
 
-class ReviewForm(ModelForm):
-    class Meta:
-        model = Review
-        fields = ['comment', 'movie']
-        labels = {
-            'comment': _('코멘트'),
-        }
-        widgets = {
-            'movie': forms.HiddenInput(),
-        }
-        help_texts = {
-            'comment': _('코멘트를 입력해주세요.'),
-        }
+# class ReviewForm(ModelForm):
+#     class Meta:
+#         model = Review
+#         fields = ['comment', 'movie']
+#         labels = {
+#             'comment': _('코멘트'),
+#         }
+#         widgets = {
+#             'movie': forms.HiddenInput(),
+#         }
+#         help_texts = {
+#             'comment': _('코멘트를 입력해주세요.'),
+#         }
