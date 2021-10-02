@@ -75,6 +75,15 @@ function Navbar() {
               Now Playing
             </Link>
           </li>
+          <li className='nav-item'>
+            <Link
+                to='/Upcoming'
+                className='nav-links'
+                onClick={closeMobileMenu}
+            >
+              Upcoming
+            </Link>
+          </li>
           <li>
             <Link
               to='/sign-up'
@@ -84,6 +93,7 @@ function Navbar() {
               Sign Up
             </Link>
           </li>
+
         </ul>
         <Button />
       </nav>

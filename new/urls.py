@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     path('Nowlist/', views.Nowlist, name='list'),
-    # path('upcoming/', views.Uplist, name='Uplist'),
+    # path('Upcoming/', views.Uplist, name='Uplist'),
     # path('create/', views.create, name='movie-create'),
     # path('create2/', views.Upcreate, name='movie-create2'),
     #

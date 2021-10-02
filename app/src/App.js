@@ -9,7 +9,7 @@ import SearchDirector from "./components/views/Search/searchDirector";
 import Search from "./components/views/Search/search.js";
 import MovieDetail from "./components/views/movieDetail";
 import NewMovie from "./components/views/Newmovie";
-
+import Upcoming from "./components/views/Upcoming";
 
 function App() {
 
@@ -18,7 +18,7 @@ function App() {
         <Suspense fallback={(<div>Loading...</div>)}>
             {/*<NavBar />*/}
 
-            <div style={{paddingTop: '69px',  minHeight: 'calc(100vh - 80px)'}}>
+            <div style={{ minHeight: 'calc(100vh - 80px)'}}>
 
                 <BrowserRouter>
                     <Navbar/>
@@ -27,7 +27,8 @@ function App() {
                         <Route exact path="/search/searchDirector" component={SearchDirector}/>
                         <Route exact path="/movie/:movieId" component={MovieDetail}/>
                         <Route exact path="/nowplaying" component={NewMovie}/>
-                    </Switch>
+                        <Route exact path="/Upcoming" component={Upcoming}/>
+                   </Switch>
                 </BrowserRouter>
             </div>
             {/*<Footer />*/}

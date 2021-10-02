@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./Comment.css";
+import "./Comment.css"
 
 import {
   Button,
@@ -49,13 +49,29 @@ class Comment extends Component {
             key={item.Movie_ID}
             className="list-group-items"
         >
-        <span
-            title={item.CommentText}
-        >
-          {item.CommentText}
-        </span><span>
-          {item.score}
-        </span>
+          <div className="container">
+            <div className="row">
+              <div className="col-8">
+                <div className="card">
+                  <div className="post-heading">
+                    <div className="float-left meta">
+                      <div className="title h5">
+                        <a href="#"><b>{item.Writer}</b></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="post-description">
+                    의견 : {item.CommentText}
+
+                  </div>
+                  <div>
+                    {item.score}점
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
           <span>
           <button
               onClick={() => this.handleDelete(item)}
